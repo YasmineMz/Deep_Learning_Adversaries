@@ -59,16 +59,21 @@ if __name__ == '__main__':
  # Cas adversarial
     loss_object = tf.keras.losses.CategoricalCrossentropy()
     i=1 # Choix de l'image considérée
-    x = x_train[i]
-    y = y_train[i]
+    x_tf = tf.convert_to_tensor(x_train[:i,:,:,:])
+    x = x_train[:i,:,:,:]
+    y = tf.convert_to_tensor(y_train[i,])
+    print(y)
 
     with tf.GradientTape() as grad:
-        grad.watch(x)
-        pred = model(x)
-        loss = loss_object(y, pred)
+        grad.watch(x_tf)
+        pred, = model.predict(x_tf)
+        print(tf.convert_to_tensor(pred))
+        loss = loss_object(y, tf.convert_to_tensor(pred))
+        print(loss)
 
     # Gradient de la loss relativement à l'entrée.
-    gradient = grad.gradient(loss, x)
+    gradient = grad.gradient(loss, x_tf)
+    print(gradient)
     signed_grad = tf.sign(gradient)
     # Choix du epsilon
     eps = 0.1
