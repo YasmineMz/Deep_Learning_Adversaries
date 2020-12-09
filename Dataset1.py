@@ -127,7 +127,7 @@ if __name__ == '__main__':
     # Label de l'image perturbée
     label_adv = classe[np.argmax(pred_adv)]
     print("Label de l'image perturbée: ", label_adv)
-    confiance_adv = np.amax(pred) * 100
+    confiance_adv = np.amax(pred_adv) * 100
     print("Confiance: ", confiance_adv)
     
 
