@@ -63,7 +63,7 @@ if __name__ == '__main__':
 ###########################################################################
 # Initialisation
     loss_object = tf.keras.losses.CategoricalCrossentropy()
-    i=1 # Choix de l'image considérée
+    i=6 # Choix de l'image considérée
 
     # Entrée
     x = test_data[0][i:i+1,:,:,:]
@@ -129,5 +129,16 @@ if __name__ == '__main__':
     print("Label de l'image perturbée: ", label_adv)
     confiance_adv = np.amax(pred_adv) * 100
     print("Confiance: ", confiance_adv)
+
+###########################################################################
+# Graphique
+
+plt.imshow(x[0,:,:,:])
+plt.show()
+adv_int = tf.cast(adv,tf.int32)
+plt.imshow(adv_int[0,:,:,:])
+plt.show()
+plt.imshow(perturbation[0,:,:,:])
+plt.show()
     
 
