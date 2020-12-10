@@ -63,7 +63,7 @@ if __name__ == '__main__':
 ###########################################################################
 # Initialisation
     loss_object = tf.keras.losses.CategoricalCrossentropy()
-    i=6 # Choix de l'image considérée
+    i=7 # Choix de l'image considérée
 
     # Entrée
     x = test_data[0][i:i+1,:,:,:]
@@ -89,12 +89,12 @@ if __name__ == '__main__':
         # print(tf.convert_to_tensor(pred))
         loss = loss_object(y_t, tf.convert_to_tensor(pred))
         # print(loss)
-    
+
     # Gradient de la loss relativement à l'entrée.
     g = grad.gradient(loss,x_t)
     # print(g)
     signed_grad = tf.sign(g)
-    
+
     # Choix du epsilon
     eps = 0.4
     perturbation = eps*signed_grad
@@ -111,7 +111,7 @@ if __name__ == '__main__':
 
 ###########################################################################
 # Traitement des résultats
-    
+
     classe = ['plane', 'car', 'bird', 'cat', 'deer', 'dog', 'frog', 'horse', 'ship', 'truck']
 
     # Label de l'image normale
